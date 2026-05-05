@@ -5,6 +5,8 @@ pageTitle: false
 pageDescription: Essays on race, culture, film, AI, and the systems shaping public life — by Joshua Smith.
 ---
 
+{% set latestPosts = collections.posts | take(config.homepageRecentCount) %}
+
 <section class="hero">
   <div class="container">
     <h1 class="hero__title">{{ site.name }}</h1>
@@ -28,7 +30,7 @@ pageDescription: Essays on race, culture, film, AI, and the systems shaping publ
   <div class="container">
     <h2 class="section__title">Featured</h2>
     <ul class="card-grid card-grid--featured">
-      {% for post in featured | slice(3) %}
+      {% for post in featured | take(3) %}
         <li class="card card--featured">
           <a href="/articles/{{ post.slug }}/">
             {% if post.featuredImage %}
@@ -47,29 +49,43 @@ pageDescription: Essays on race, culture, film, AI, and the systems shaping publ
 </section>
 {% endif %}
 
-<section class="section">
+<section class="section section--latest" aria-labelledby="latest-heading">
   <div class="container">
-    <h2 class="section__title">Latest</h2>
-    <ul class="card-grid">
-      {% for post in collections.posts | slice(config.homepageRecentCount) %}
-        <li class="card">
-          <a href="/articles/{{ post.slug }}/">
+    <div class="section-header">
+      <div>
+        <p class="section-header__eyebrow">Newest writing</p>
+        <h2 class="section-header__title" id="latest-heading">Latest essays</h2>
+      </div>
+      <a class="section-header__link" href="/archive/">All essays</a>
+    </div>
+
+    {% if latestPosts.length %}
+    <ol class="latest-grid">
+      {% for post in latestPosts %}
+        <li class="latest-card{% if loop.first %} latest-card--lead{% endif %}">
+          <a class="latest-card__link" href="/articles/{{ post.slug }}/">
             {% if post.featuredImage %}
-              <img class="card__img" src="{{ post.featuredImage }}" alt="{{ post.title }}" loading="lazy" />
+              <img class="latest-card__img" src="{{ post.featuredImage }}" alt="{{ post.title }}" loading="lazy" />
             {% endif %}
-            <p class="card__topic">
-              {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
-            </p>
-            <h3 class="card__title">{{ post.title }}</h3>
-            <time class="card__date" datetime="{{ post.publishedAt | isoDate }}">
-              {{ post.publishedAt | readableDate }}
-            </time>
-            <p class="card__excerpt">{{ post.excerpt | truncate(140) }}</p>
+            <div class="latest-card__body">
+              <div class="latest-card__meta">
+                <span>
+                  {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
+                </span>
+                <time datetime="{{ post.publishedAt | isoDate }}">
+                  {{ post.publishedAt | readableDate }}
+                </time>
+              </div>
+              <h3 class="latest-card__title">{{ post.title }}</h3>
+              <p class="latest-card__excerpt">{{ post.excerpt | truncate(150) }}</p>
+            </div>
           </a>
         </li>
       {% endfor %}
-    </ul>
-    <p class="section__more"><a href="/archive/">See all essays →</a></p>
+    </ol>
+    {% else %}
+      <p class="empty">No essays are available yet.</p>
+    {% endif %}
   </div>
 </section>
 

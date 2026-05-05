@@ -54,6 +54,15 @@ module.exports = function (eleventyConfig) {
     return clean.slice(0, n).replace(/\s+\S*$/, "") + "…";
   });
 
+  // Return the first N items from an array. Nunjucks' built-in `slice`
+  // groups arrays instead of behaving like JavaScript's Array.slice.
+  eleventyConfig.addFilter("take", (items, n) => {
+    if (!Array.isArray(items)) return [];
+    const count = Number.parseInt(n, 10);
+    if (!Number.isFinite(count) || count <= 0) return [];
+    return items.slice(0, count);
+  });
+
   // JSON-stringify safely for embedding in HTML
   eleventyConfig.addFilter("jsonify", (obj) => {
     return JSON.stringify(obj).replace(/</g, "\\u003c");

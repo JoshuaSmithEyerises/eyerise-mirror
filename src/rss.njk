@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
     <description>{{ site.description }}</description>
     <atom:link href="{{ site.url }}/rss.xml" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    {% for post in collections.posts | slice(20) %}
+    {% for post in collections.posts | take(20) %}
     <item>
       <title>{{ post.title }}</title>
       <link>{{ site.url }}/articles/{{ post.slug }}/</link>
