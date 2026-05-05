@@ -104,6 +104,9 @@ module.exports = function (eleventyConfig) {
     return grouped;
   });
 
+  // Make site config available in templates
+  eleventyConfig.addGlobalData("config", siteConfig);
+
   return {
     dir: {
       input: "src",

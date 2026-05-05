@@ -32,7 +32,7 @@ pageDescription: Essays on race, culture, film, AI, and the systems shaping publ
         <li class="card card--featured">
           <a href="/articles/{{ post.slug }}/">
             {% if post.featuredImage %}
-              <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+              <img class="card__img" src="{{ post.featuredImage }}" alt="{{ post.title }}" loading="lazy" />
             {% endif %}
             <p class="card__topic">
               {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
@@ -55,7 +55,7 @@ pageDescription: Essays on race, culture, film, AI, and the systems shaping publ
         <li class="card">
           <a href="/articles/{{ post.slug }}/">
             {% if post.featuredImage %}
-              <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+              <img class="card__img" src="{{ post.featuredImage }}" alt="{{ post.title }}" loading="lazy" />
             {% endif %}
             <p class="card__topic">
               {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
