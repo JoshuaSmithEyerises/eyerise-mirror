@@ -75,7 +75,7 @@
 {% endif %}
 
 <article class="article">
-  <div class="container container--narrow">
+  <div class="container container--article">
 
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>
@@ -92,6 +92,8 @@
       <h1 class="article__title">{{ post.title }}</h1>
       {% if post.subtitle %}
         <p class="article__subtitle">{{ post.subtitle }}</p>
+      {% elif post.excerpt %}
+        <p class="article__dek">{{ post.excerpt | truncate(180) }}</p>
       {% endif %}
       <div class="article__meta">
         <span>By {{ post.author }}</span>
@@ -115,7 +117,7 @@
     {% endif %}
 
     <div class="article__body" id="articleBody">
-      {{ post.bodyHtml | safe }}
+      {{ post.bodyHtml | cleanSubstackHtml | safe }}
     </div>
 
     {# Optional FAQ block, rendered visibly when JSON-LD FAQ is set #}
@@ -132,9 +134,13 @@
     {% endif %}
 
     <aside class="cta-subscribe">
-      <h2>Get new essays in your inbox.</h2>
-      <p>I publish on {{ site.name }}. Free to subscribe, no spam.</p>
-      <a class="btn btn--primary" href="{{ site.substackUrl }}" rel="external">Subscribe on Substack</a>
+      <p class="cta-subscribe__eyebrow">Keep reading</p>
+      <h2>Get the next essay when it drops.</h2>
+      <p>Free to subscribe. New criticism and essays from {{ site.name }}.</p>
+      <div class="cta-subscribe__actions">
+        <a class="btn btn--primary" href="{{ site.substackUrl }}/subscribe" rel="external">Subscribe on Substack</a>
+        <a class="btn btn--ghost" href="/archive/">Browse the archive</a>
+      </div>
     </aside>
 
     {% if relatedPosts and relatedPosts.length %}

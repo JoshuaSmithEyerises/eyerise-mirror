@@ -68,6 +68,78 @@ module.exports = function (eleventyConfig) {
     return JSON.stringify(obj).replace(/</g, "\\u003c");
   });
 
+  // Remove Substack app chrome that is broken or redundant on the static mirror.
+  eleventyConfig.addFilter("cleanSubstackHtml", (html) => {
+    if (!html) return "";
+    const { parse } = require("node-html-parser");
+    const root = parse(`<div id="__substack_body">${html}</div>`);
+    const wrapper = root.querySelector("#__substack_body");
+    if (!wrapper) return html;
+
+    const escapeHtml = (value) =>
+      String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+    for (const node of wrapper.querySelectorAll(".digest-post-embed")) {
+      try {
+        const attrs = JSON.parse(node.getAttribute("data-attrs") || "{}");
+        const href = attrs.canonical_url || attrs.url;
+        const title = attrs.title;
+        if (!href || !title) continue;
+
+        const cardHtml = `
+          <aside class="article-embed">
+            <a class="article-embed__link" href="${escapeHtml(href)}" rel="external">
+              ${
+                attrs.cover_image
+                  ? `<img class="article-embed__img" src="${escapeHtml(
+                      attrs.cover_image
+                    )}" alt="" loading="lazy">`
+                  : ""
+              }
+              <span class="article-embed__label">Referenced essay</span>
+              <strong class="article-embed__title">${escapeHtml(title)}</strong>
+              ${
+                attrs.caption
+                  ? `<span class="article-embed__caption">${escapeHtml(
+                      attrs.caption
+                    )}</span>`
+                  : ""
+              }
+            </a>
+          </aside>
+        `;
+        const card = parse(cardHtml).querySelector(".article-embed");
+        if (card) node.replaceWith(card);
+      } catch (error) {
+        // If an embed cannot be parsed, the cleanup pass below removes it.
+      }
+    }
+
+    const selectorsToRemove = [
+      ".subscription-widget-wrap",
+      ".subscription-widget-wrap-editor",
+      ".subscribe-widget",
+      '[data-component-name="SubscribeWidget"]',
+      ".header-anchor-parent",
+      ".image-link-expand",
+      ".digest-post-embed",
+      ".third-party-cookie-check-iframe",
+      ".fallback-failure",
+    ];
+
+    for (const selector of selectorsToRemove) {
+      for (const node of wrapper.querySelectorAll(selector)) {
+        node.remove();
+      }
+    }
+
+    return wrapper.innerHTML;
+  });
+
   // Absolute URL helper
   eleventyConfig.addFilter("absoluteUrl", (path) => {
     if (!path) return siteConfig.site.url;
