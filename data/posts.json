@@ -22,6 +22,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -47,6 +48,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -72,6 +74,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -97,6 +100,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -122,6 +126,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -147,6 +152,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -172,6 +178,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -197,6 +204,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -222,6 +230,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -247,6 +256,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -272,6 +282,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -297,6 +308,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -322,6 +334,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -347,6 +360,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -372,6 +386,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -397,6 +412,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -422,6 +438,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -447,6 +464,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -472,6 +490,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -497,6 +516,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -516,12 +536,13 @@
     "topic": "film-and-television",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:18.604Z",
-    "modifiedAt": "2026-05-05T19:30:18.604Z",
+    "publishedAt": "2026-02-15T12:00:00.000Z",
+    "modifiedAt": "2026-02-15T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -541,12 +562,13 @@
     "topic": "race-and-culture",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:18.948Z",
-    "modifiedAt": "2026-05-05T19:30:18.948Z",
+    "publishedAt": "2026-02-11T12:00:00.000Z",
+    "modifiedAt": "2026-02-11T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -566,12 +588,13 @@
     "topic": "sports-and-politics",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:19.167Z",
-    "modifiedAt": "2026-05-05T19:30:19.167Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -591,12 +614,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:19.630Z",
-    "modifiedAt": "2026-05-05T19:30:19.630Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -616,12 +640,13 @@
     "topic": "race-and-culture",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:19.870Z",
-    "modifiedAt": "2026-05-05T19:30:19.870Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -641,12 +666,13 @@
     "topic": "surveillance-and-media-power",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:20.230Z",
-    "modifiedAt": "2026-05-05T19:30:20.230Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -666,12 +692,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:20.726Z",
-    "modifiedAt": "2026-05-05T19:30:20.726Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -691,12 +718,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:21.074Z",
-    "modifiedAt": "2026-05-05T19:30:21.074Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -716,12 +744,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:21.292Z",
-    "modifiedAt": "2026-05-05T19:30:21.292Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -741,12 +770,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:21.696Z",
-    "modifiedAt": "2026-05-05T19:30:21.696Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -766,12 +796,13 @@
     "topic": "surveillance-and-media-power",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:22.218Z",
-    "modifiedAt": "2026-05-05T19:30:22.218Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -791,12 +822,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:22.587Z",
-    "modifiedAt": "2026-05-05T19:30:22.587Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -816,12 +848,13 @@
     "topic": "religion-and-public-life",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:23.103Z",
-    "modifiedAt": "2026-05-05T19:30:23.103Z",
+    "publishedAt": "2026-01-07T12:00:00.000Z",
+    "modifiedAt": "2026-01-07T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -841,12 +874,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:23.958Z",
-    "modifiedAt": "2026-05-05T19:30:23.958Z",
+    "publishedAt": "2026-01-07T12:00:00.000Z",
+    "modifiedAt": "2026-01-07T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -866,12 +900,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:24.168Z",
-    "modifiedAt": "2026-05-05T19:30:24.168Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -891,12 +926,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:24.520Z",
-    "modifiedAt": "2026-05-05T19:30:24.520Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -916,12 +952,13 @@
     "topic": "race-and-culture",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:24.848Z",
-    "modifiedAt": "2026-05-05T19:30:24.848Z",
+    "publishedAt": "2026-02-24T12:00:00.000Z",
+    "modifiedAt": "2026-02-24T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -941,12 +978,13 @@
     "topic": "race-and-culture",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:25.261Z",
-    "modifiedAt": "2026-05-05T19:30:25.261Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -966,12 +1004,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:25.509Z",
-    "modifiedAt": "2026-05-05T19:30:25.509Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -991,12 +1030,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:26.000Z",
-    "modifiedAt": "2026-05-05T19:30:26.000Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -1016,12 +1056,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:26.407Z",
-    "modifiedAt": "2026-05-05T19:30:26.407Z",
+    "publishedAt": "2026-02-27T12:00:00.000Z",
+    "modifiedAt": "2026-02-27T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -1041,12 +1082,13 @@
     "topic": "film-and-television",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:26.611Z",
-    "modifiedAt": "2026-05-05T19:30:26.611Z",
+    "publishedAt": "2026-01-07T12:00:00.000Z",
+    "modifiedAt": "2026-01-07T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -1066,12 +1108,13 @@
     "topic": "ai-and-labor",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:26.818Z",
-    "modifiedAt": "2026-05-05T19:30:26.818Z",
+    "publishedAt": "2026-01-07T12:00:00.000Z",
+    "modifiedAt": "2026-01-07T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   },
   {
@@ -1091,12 +1134,13 @@
     "topic": "personal-and-essays",
     "tags": [],
     "series": null,
-    "publishedAt": "2026-05-05T19:30:27.152Z",
-    "modifiedAt": "2026-05-05T19:30:27.152Z",
+    "publishedAt": "2026-01-07T12:00:00.000Z",
+    "modifiedAt": "2026-01-07T12:00:00.000Z",
     "author": "Joshua Smith",
     "noindex": false,
     "featured": false,
     "evergreen": false,
+    "popular": false,
     "relatedSlugs": []
   }
 ]

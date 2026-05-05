@@ -9,14 +9,14 @@ pageDescription: New to EyeRise? Begin with these essays.
   <div class="container container--narrow">
     <header class="page-header">
       <h1>Start Here</h1>
-      <p>If you're new, begin with the essays below. They lay out the core threads — race, culture, film, AI, surveillance — that everything else builds on.</p>
+      <p>If you're new, begin with the most popular essays below.</p>
     </header>
 
-    {% set evergreen = collections.posts | selectattr("evergreen", "equalto", true) %}
+    {% set popular = collections.posts | selectattr("popular", "equalto", true) %}
 
-    {% if evergreen.length %}
+    {% if popular.length %}
       <ul class="card-grid">
-        {% for post in evergreen %}
+        {% for post in popular %}
           <li class="card">
             <a href="/articles/{{ post.slug }}/">
               {% if post.featuredImage %}
@@ -32,7 +32,7 @@ pageDescription: New to EyeRise? Begin with these essays.
         {% endfor %}
       </ul>
     {% else %}
-      <p class="empty">No evergreen essays flagged yet. Add <code>"evergreen": true</code> to override files, or list slugs in <code>site.config.js → evergreenSlugs</code>.</p>
+      <p class="empty">No popular essays configured yet. Add post slugs to <code>site.config.js → popularSlugs</code>.</p>
     {% endif %}
   </div>
 </section>

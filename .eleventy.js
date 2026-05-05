@@ -96,7 +96,10 @@ module.exports = function (eleventyConfig) {
     const posts = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
     const grouped = {};
     for (const topic of siteConfig.topics) {
-      grouped[topic.slug] = posts.filter((p) => p.topic === topic.slug);
+      // Filter posts by topic and sort by date (newest first)
+      grouped[topic.slug] = posts
+        .filter((p) => p.topic === topic.slug)
+        .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
     }
     return grouped;
   });

@@ -113,9 +113,9 @@ function stripHtml(html) {
 }
 
 /**
- * Fetch all post URLs from the sitemap
+ * Fetch all post URLs and dates from the sitemap
  */
-async function fetchAllPostUrls() {
+async function fetchAllPostUrlsFromSitemap() {
   const sitemapUrl = siteConfig.site.substackUrl + "/sitemap.xml";
   console.log(`📡  Fetching sitemap: ${sitemapUrl}`);
 
@@ -123,21 +123,27 @@ async function fetchAllPostUrls() {
     const response = await fetch(sitemapUrl);
     const xml = await response.text();
 
-    // Extract all <loc> tags from sitemap using regex
-    const locRegex = /<loc>(.*?)<\/loc>/g;
-    const urls = [];
-    let match;
+    // Extract URLs and lastmod dates from sitemap
+    // The sitemap format is: <url><loc>URL</loc><lastmod>DATE</lastmod></url>
+    const urlBlocks = xml.match(/<url>[\s\S]*?<\/url>/g) || [];
+    const posts = [];
 
-    while ((match = locRegex.exec(xml)) !== null) {
-      const url = match[1];
-      // Only include post URLs (contain /p/)
-      if (url.includes('/p/') && !url.includes('/archive') && !url.includes('/about')) {
-        urls.push(url);
+    for (const block of urlBlocks) {
+      const locMatch = block.match(/<loc>(.*?)<\/loc>/);
+      const lastmodMatch = block.match(/<lastmod>(.*?)<\/lastmod>/);
+
+      if (locMatch) {
+        const url = locMatch[1];
+        // Only include post URLs (contain /p/)
+        if (url.includes('/p/') && !url.includes('/archive') && !url.includes('/about')) {
+          const lastmod = lastmodMatch ? lastmodMatch[1] : null;
+          posts.push({ url, lastmod });
+        }
       }
     }
 
-    console.log(`✅  Found ${urls.length} posts in sitemap`);
-    return urls;
+    console.log(`✅  Found ${posts.length} posts in sitemap`);
+    return posts;
   } catch (err) {
     console.error(`⚠️  Could not fetch sitemap: ${err.message}`);
     return [];
@@ -145,11 +151,23 @@ async function fetchAllPostUrls() {
 }
 
 /**
- * Fetch RSS feed for a specific post URL
+ * Fetch individual RSS feed for a specific post
  */
-async function fetchPostFromUrl(url) {
+async function fetchPostFromUrl(url, sitemapDate) {
   try {
-    // Substack provides individual post feeds at the post URL + /feed
+    // Substack provides individual post RSS feeds at /feed
+    const feedUrl = url + '/feed';
+    const feedResponse = await fetch(feedUrl);
+
+    if (feedResponse.ok) {
+      const feedXml = await feedResponse.text();
+      const feedData = await parser.parseString(feedXml);
+      if (feedData && feedData.items && feedData.items[0]) {
+        return feedData.items[0];
+      }
+    }
+
+    // Fallback to scraping HTML if RSS feed doesn't work
     const response = await fetch(url);
     const html = await response.text();
     const root = parseHtml(html);
@@ -158,11 +176,29 @@ async function fetchPostFromUrl(url) {
     const title = root.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
     const description = root.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
     const image = root.querySelector('meta[property="og:image"]')?.getAttribute('content') || null;
-    const pubDate = root.querySelector('meta[property="article:published_time"]')?.getAttribute('content') || new Date().toISOString();
-    const author = root.querySelector('meta[property="article:author"]')?.getAttribute('content') || siteConfig.site.author;
+
+    // Try multiple date selectors, fall back to sitemap date
+    let pubDate = root.querySelector('meta[property="article:published_time"]')?.getAttribute('content');
+    if (!pubDate) {
+      pubDate = root.querySelector('time[datetime]')?.getAttribute('datetime');
+    }
+    if (!pubDate && sitemapDate) {
+      // Use the lastmod from sitemap as a fallback
+      pubDate = sitemapDate + 'T12:00:00.000Z'; // Add time component
+    }
+    if (!pubDate) {
+      console.warn(`⚠️  Skipping ${url} - no publish date found`);
+      return null;
+    }
+
+    const author = root.querySelector('meta[property="article:author"]')?.getAttribute('content') ||
+                   root.querySelector('meta[name="author"]')?.getAttribute('content') ||
+                   siteConfig.site.author;
 
     // Extract main content
-    const contentDiv = root.querySelector('.available-content') || root.querySelector('article') || root.querySelector('.post');
+    const contentDiv = root.querySelector('.available-content') ||
+                       root.querySelector('article') ||
+                       root.querySelector('.post');
     const contentHtml = contentDiv ? contentDiv.innerHTML : '';
     const contentSnippet = stripHtml(description || contentHtml).slice(0, 280);
 
@@ -196,18 +232,18 @@ async function sync() {
 
   console.log(`✅  Got ${feed.items.length} items from RSS feed.`);
 
-  // Fetch all post URLs from sitemap to get complete list
-  const allPostUrls = await fetchAllPostUrls();
+  // Fetch all post URLs and dates from sitemap to get complete list
+  const sitemapPosts = await fetchAllPostUrlsFromSitemap();
 
-  // Get URLs that aren't in the RSS feed
+  // Get posts that aren't in the RSS feed
   const rssUrls = new Set(feed.items.map(item => item.link));
-  const missingUrls = allPostUrls.filter(url => !rssUrls.has(url));
+  const missingPosts = sitemapPosts.filter(post => !rssUrls.has(post.url));
 
-  if (missingUrls.length > 0) {
-    console.log(`📡  Fetching ${missingUrls.length} additional posts from sitemap...`);
+  if (missingPosts.length > 0) {
+    console.log(`📡  Fetching ${missingPosts.length} additional posts from sitemap...`);
 
-    for (const url of missingUrls) {
-      const post = await fetchPostFromUrl(url);
+    for (const sitemapPost of missingPosts) {
+      const post = await fetchPostFromUrl(sitemapPost.url, sitemapPost.lastmod);
       if (post) {
         feed.items.push(post);
       }
@@ -272,16 +308,18 @@ async function sync() {
       noindex: override.noindex === true,
       featured: override.featured === true,
       evergreen: override.evergreen === true,
+      popular: override.popular === true,
 
       // Manual related-post slugs. If empty, related posts are auto-computed.
       relatedSlugs: override.relatedSlugs || [],
     };
   });
 
-  // Apply config-level featured/evergreen flags too
+  // Apply config-level featured/evergreen/popular flags
   for (const post of posts) {
     if (siteConfig.featuredSlugs.includes(post.slug)) post.featured = true;
     if (siteConfig.evergreenSlugs.includes(post.slug)) post.evergreen = true;
+    if (siteConfig.popularSlugs && siteConfig.popularSlugs.includes(post.slug)) post.popular = true;
   }
 
   fs.writeFileSync(POSTS_FILE, JSON.stringify(posts, null, 2));

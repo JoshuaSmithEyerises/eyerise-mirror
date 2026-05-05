@@ -12,7 +12,7 @@ module.exports = {
     author: "Joshua Smith",
     authorUrl: "https://eyerise.substack.com/",
     // The URL where THIS mirror is deployed. Used for canonical, sitemap, OG tags.
-    url: "https://eyerise.example.com",
+    url: "https://eyerisesubstack.netlify.app",
     // The original Substack URL. Used as default canonical target.
     substackUrl: "https://eyerise.substack.com",
     rssFeed: "https://eyerise.substack.com/feed",
@@ -103,6 +103,14 @@ module.exports = {
   // it's silently skipped.
   featuredSlugs: [],
 
-  // Evergreen / Start Here — list of slugs.
+  // Most Popular / Start Here — list of slugs for your most popular essays.
+  // These show on the /start-here/ page.
+  popularSlugs: [
+    // Add your most popular post slugs here, e.g.:
+    // "christianity-is-a-costume-in-america",
+    // "who-controls-what-you-know-trump",
+  ],
+
+  // Evergreen / Start Here — list of slugs (deprecated, use popularSlugs instead).
   evergreenSlugs: [],
 };
