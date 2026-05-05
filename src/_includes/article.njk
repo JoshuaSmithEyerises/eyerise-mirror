@@ -1,0 +1,164 @@
+{# ---------- ARTICLE JSON-LD ---------- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ post.title | jsonify | safe }},
+  "description": {{ post.metaDescription | jsonify | safe }},
+  "image": {% if post.featuredImage %}{{ post.featuredImage | jsonify | safe }}{% else %}null{% endif %},
+  "datePublished": "{{ post.publishedAt | isoDate }}",
+  "dateModified": "{{ post.modifiedAt | isoDate }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ post.author | jsonify | safe }},
+    "url": "{{ site.authorUrl }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.name | jsonify | safe }},
+    "url": "{{ site.url }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ canonicalUrl or (site.url + '/articles/' + post.slug + '/') }}"
+  }
+}
+</script>
+
+{# ---------- BREADCRUMB JSON-LD ---------- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ topicName | jsonify | safe }},
+      "item": "{{ site.url }}/topics/{{ post.topic }}/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ post.title | jsonify | safe }}
+    }
+  ]
+}
+</script>
+
+{# ---------- FAQ JSON-LD (only if defined in override) ---------- #}
+{% if post.faq and post.faq.length %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in post.faq %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | jsonify | safe }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.a | jsonify | safe }}
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
+<article class="article">
+  <div class="container container--narrow">
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/topics/{{ post.topic }}/">{{ topicName }}</a></li>
+        <li aria-current="page">{{ post.title }}</li>
+      </ol>
+    </nav>
+
+    <header class="article__header">
+      <p class="article__topic">
+        <a href="/topics/{{ post.topic }}/">{{ topicName }}</a>
+      </p>
+      <h1 class="article__title">{{ post.title }}</h1>
+      {% if post.subtitle %}
+        <p class="article__subtitle">{{ post.subtitle }}</p>
+      {% endif %}
+      <div class="article__meta">
+        <span>By {{ post.author }}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime="{{ post.publishedAt | isoDate }}">{{ post.publishedAt | readableDate }}</time>
+      </div>
+    </header>
+
+    {% if post.featuredImage %}
+      <figure class="article__hero">
+        <img src="{{ post.featuredImage }}" alt="" loading="eager" />
+      </figure>
+    {% endif %}
+
+    {# Optional manual intro summary — written in the override file.
+       Useful for adding original content that justifies a "mirror" canonical. #}
+    {% if post.introSummary %}
+      <div class="article__intro">
+        {{ post.introSummary | safe }}
+      </div>
+    {% endif %}
+
+    <div class="article__body" id="articleBody">
+      {{ post.bodyHtml | safe }}
+    </div>
+
+    {# Optional FAQ block, rendered visibly when JSON-LD FAQ is set #}
+    {% if post.faq and post.faq.length %}
+      <section class="faq" aria-labelledby="faqHeading">
+        <h2 id="faqHeading">Frequently asked</h2>
+        <dl>
+          {% for item in post.faq %}
+            <dt>{{ item.q }}</dt>
+            <dd>{{ item.a | safe }}</dd>
+          {% endfor %}
+        </dl>
+      </section>
+    {% endif %}
+
+    <aside class="cta-subscribe">
+      <h2>Get new essays in your inbox.</h2>
+      <p>I publish on {{ site.name }}. Free to subscribe, no spam.</p>
+      <a class="btn btn--primary" href="{{ site.substackUrl }}" rel="external">Subscribe on Substack</a>
+    </aside>
+
+    {% if relatedPosts and relatedPosts.length %}
+      <section class="related" aria-labelledby="relatedHeading">
+        <h2 id="relatedHeading">Related essays</h2>
+        <ul class="card-grid">
+          {% for r in relatedPosts %}
+            <li class="card">
+              <a href="/articles/{{ r.slug }}/">
+                {% if r.featuredImage %}
+                  <img class="card__img" src="{{ r.featuredImage }}" alt="" loading="lazy" />
+                {% endif %}
+                <h3 class="card__title">{{ r.title }}</h3>
+                <p class="card__excerpt">{{ r.excerpt | truncate(120) }}</p>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+
+    <p class="article__source">
+      Originally published at <a href="{{ post.substackUrl }}" rel="external">{{ site.name }} on Substack</a>.
+    </p>
+
+  </div>
+</article>

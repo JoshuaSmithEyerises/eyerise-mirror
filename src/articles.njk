@@ -1,0 +1,29 @@
+---
+layout: base.njk
+pagination:
+  data: collections.posts
+  size: 1
+  alias: post
+permalink: "articles/{{ post.slug }}/"
+---
+
+{# Compute related posts: explicit slugs from override take priority,
+   otherwise auto-pick from same topic. #}
+{% set relatedPosts = [] %}
+{% if post.relatedSlugs and post.relatedSlugs.length %}
+  {% for slug in post.relatedSlugs %}
+    {% for p in collections.posts %}
+      {% if p.slug == slug %}{% set _ = relatedPosts.push(p) %}{% endif %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% set count = 0 %}
+  {% for p in collections.posts %}
+    {% if p.topic == post.topic and p.slug != post.slug and count < config.relatedPostsCount %}
+      {% set _ = relatedPosts.push(p) %}
+      {% set count = count + 1 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% include "article.njk" %}

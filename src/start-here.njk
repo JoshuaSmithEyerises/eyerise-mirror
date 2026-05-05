@@ -1,0 +1,38 @@
+---
+layout: base.njk
+permalink: /start-here/
+pageTitle: Start Here
+pageDescription: New to EyeRise? Begin with these essays.
+---
+
+<section class="section">
+  <div class="container container--narrow">
+    <header class="page-header">
+      <h1>Start Here</h1>
+      <p>If you're new, begin with the essays below. They lay out the core threads — race, culture, film, AI, surveillance — that everything else builds on.</p>
+    </header>
+
+    {% set evergreen = collections.posts | selectattr("evergreen", "equalto", true) %}
+
+    {% if evergreen.length %}
+      <ul class="card-grid">
+        {% for post in evergreen %}
+          <li class="card">
+            <a href="/articles/{{ post.slug }}/">
+              {% if post.featuredImage %}
+                <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+              {% endif %}
+              <p class="card__topic">
+                {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
+              </p>
+              <h3 class="card__title">{{ post.title }}</h3>
+              <p class="card__excerpt">{{ post.excerpt | truncate(160) }}</p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">No evergreen essays flagged yet. Add <code>"evergreen": true</code> to override files, or list slugs in <code>site.config.js → evergreenSlugs</code>.</p>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/archive/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/topics/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/start-here/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/about/</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  {% for topic in topics %}
+  <url>
+    <loc>{{ site.url }}/topics/{{ topic.slug }}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+  {# Only include articles that are NOT noindex AND whose canonical points to the mirror.
+     If canonical is "substack", we still include the page in the sitemap because
+     it's a valid mirror page — but Google will respect the canonical tag and
+     consolidate ranking to Substack. If you'd rather omit substack-canonical pages
+     entirely from the sitemap, change the condition below. #}
+  {% for post in collections.posts %}
+  {% if not post.noindex and post.canonicalMode != "noindex" %}
+  <url>
+    <loc>{{ site.url }}/articles/{{ post.slug }}/</loc>
+    <lastmod>{{ post.modifiedAt | isoDate }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {% endif %}
+  {% endfor %}
+</urlset>

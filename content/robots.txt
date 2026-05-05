@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block accidental indexing of build artifacts (none currently).
+Disallow: /search-index.json
+
+Sitemap: https://eyerise.example.com/sitemap.xml

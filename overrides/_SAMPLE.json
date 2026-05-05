@@ -1,0 +1,41 @@
+{
+  "_comment": "This is a SAMPLE override file. Copy it, rename to {your-post-slug}.json, fill in only the fields you want to override. Empty/missing fields fall back to the RSS feed data.",
+
+  "title": "What Sinners Got Right About the Cost of Selling Your Soul",
+  "seoTitle": "Sinners (2025) Review: Coogler's Period Horror and Cultural Memory",
+  "subtitle": "On Ryan Coogler's vampire myth and the price of leaving home.",
+  "metaDescription": "A long-form essay on Sinners, Ryan Coogler's 1930s Mississippi vampire film — what it gets right about Black cultural memory and what makes it more than a genre exercise.",
+
+  "slug": "sinners-coogler-cultural-memory",
+
+  "topic": "film-and-television",
+  "tags": ["Sinners", "Ryan Coogler", "horror", "Black film", "Mississippi"],
+  "series": "Black Horror Renaissance",
+
+  "featuredImage": "https://substackcdn.com/image/your-hero-image.jpg",
+
+  "canonicalMode": "mirror",
+  "_canonicalNote": "Set to 'mirror' here because we added a 400-word original intro and FAQ section that don't exist on the Substack version. If this were just a copy of the post, leave it 'substack'.",
+
+  "noindex": false,
+  "featured": true,
+  "evergreen": true,
+
+  "introSummary": "<p><em>This is the expanded version of the essay. The original Substack post focused on the film itself; here I added a longer setup on the history of Black horror as a genre, plus an FAQ at the bottom for readers who haven't seen the film yet.</em></p>",
+
+  "faq": [
+    {
+      "q": "Do I need to have seen Sinners to read this essay?",
+      "a": "No. The first half is spoiler-light and works as a primer on Coogler's project. I flag spoilers before they happen."
+    },
+    {
+      "q": "Is this a review or an analysis?",
+      "a": "Both. The first third functions as a review for readers deciding whether to watch. The rest is closer to cultural criticism."
+    }
+  ],
+
+  "relatedSlugs": [
+    "candyman-2021-and-the-myth-of-the-haunted-projects",
+    "get-out-and-the-grammar-of-american-horror"
+  ]
+}

@@ -1,0 +1,63 @@
+---
+layout: base.njk
+pagination:
+  data: topics
+  size: 1
+  alias: topic
+permalink: "topics/{{ topic.slug }}/"
+eleventyComputed:
+  pageTitle: "{{ topic.name }}"
+  pageDescription: "{{ topic.intro }}"
+---
+
+<section class="section">
+  <div class="container container--narrow">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/topics/">Topics</a></li>
+        <li aria-current="page">{{ topic.name }}</li>
+      </ol>
+    </nav>
+
+    <header class="topic-header">
+      <p class="topic-header__kicker">Topic</p>
+      <h1>{{ topic.name }}</h1>
+      <p class="topic-header__intro">{{ topic.intro }}</p>
+    </header>
+
+    {% set topicPosts = collections.posts | selectattr("topic", "equalto", topic.slug) %}
+
+    {% if topicPosts.length %}
+      <ul class="card-grid">
+        {% for post in topicPosts %}
+          <li class="card">
+            <a href="/articles/{{ post.slug }}/">
+              {% if post.featuredImage %}
+                <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+              {% endif %}
+              <h3 class="card__title">{{ post.title }}</h3>
+              <time class="card__date" datetime="{{ post.publishedAt | isoDate }}">
+                {{ post.publishedAt | readableDate }}
+              </time>
+              <p class="card__excerpt">{{ post.excerpt | truncate(140) }}</p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">No essays in this topic yet. <a href="/archive/">Browse the full archive →</a></p>
+    {% endif %}
+  </div>
+</section>
+
+{# JSON-LD CollectionPage so Google understands this is a topic hub, not a duplicate post page. #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ topic.name | jsonify | safe }},
+  "description": {{ topic.intro | jsonify | safe }},
+  "url": "{{ site.url }}/topics/{{ topic.slug }}/"
+}
+</script>

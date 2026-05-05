@@ -1,0 +1,80 @@
+---
+layout: base.njk
+permalink: /search/
+pageTitle: Search
+pageDescription: Search every essay on EyeRise.
+---
+
+<section class="section">
+  <div class="container container--narrow">
+    <header class="page-header">
+      <h1>Search</h1>
+      <p>Type a keyword. Results appear instantly.</p>
+    </header>
+
+    <div class="search-box">
+      <label>
+        <span class="visually-hidden">Search</span>
+        <input type="search" id="searchInput" placeholder="Try “Sinners”, “surveillance”, “Kendrick”…" autofocus />
+      </label>
+    </div>
+
+    <p class="search-status" id="searchStatus">Loading index…</p>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</section>
+
+<script>
+  // Search page boots immediately. Pulls /search-index.json once, filters on input.
+  (async () => {
+    const input = document.getElementById("searchInput");
+    const status = document.getElementById("searchStatus");
+    const results = document.getElementById("searchResults");
+
+    let index = [];
+    try {
+      const res = await fetch("/search-index.json");
+      index = await res.json();
+      status.textContent = `Searching across ${index.length} essays.`;
+    } catch (e) {
+      status.textContent = "Search index unavailable.";
+      return;
+    }
+
+    function render(matches, q) {
+      results.innerHTML = "";
+      if (!q) {
+        status.textContent = `Searching across ${index.length} essays.`;
+        return;
+      }
+      if (!matches.length) {
+        status.textContent = `No matches for “${q}”.`;
+        return;
+      }
+      status.textContent = `${matches.length} match${matches.length === 1 ? "" : "es"} for “${q}”.`;
+      for (const m of matches.slice(0, 50)) {
+        const li = document.createElement("li");
+        li.className = "search-result";
+        li.innerHTML = `
+          <a href="${m.url}">
+            <h3>${m.title}</h3>
+            <p>${m.excerpt || ""}</p>
+          </a>`;
+        results.appendChild(li);
+      }
+    }
+
+    input.addEventListener("input", () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) return render([], "");
+      const matches = index.filter((p) => {
+        return (
+          p.title.toLowerCase().includes(q) ||
+          (p.excerpt && p.excerpt.toLowerCase().includes(q)) ||
+          (p.tags && p.tags.join(" ").toLowerCase().includes(q))
+        );
+      });
+      render(matches, q);
+    });
+  })();
+</script>

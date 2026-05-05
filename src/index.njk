@@ -1,0 +1,85 @@
+---
+layout: base.njk
+permalink: /
+pageTitle: false
+pageDescription: Essays on race, culture, film, AI, and the systems shaping public life — by Joshua Smith.
+---
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">{{ site.name }}</h1>
+    <p class="hero__tagline">{{ site.tagline }}</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="{{ site.substackUrl }}" rel="external">Subscribe</a>
+      <a class="btn btn--ghost" href="/start-here/">Start here</a>
+    </div>
+  </div>
+</section>
+
+{# Featured essays — pulled from posts flagged featured=true #}
+{% set featured = collections.posts | selectattr("featured", "equalto", true) %}
+{% if featured.length %}
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Featured</h2>
+    <ul class="card-grid card-grid--featured">
+      {% for post in featured | slice(3) %}
+        <li class="card card--featured">
+          <a href="/articles/{{ post.slug }}/">
+            {% if post.featuredImage %}
+              <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+            {% endif %}
+            <p class="card__topic">
+              {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
+            </p>
+            <h3 class="card__title">{{ post.title }}</h3>
+            <p class="card__excerpt">{{ post.excerpt | truncate(140) }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Latest</h2>
+    <ul class="card-grid">
+      {% for post in collections.posts | slice(config.homepageRecentCount) %}
+        <li class="card">
+          <a href="/articles/{{ post.slug }}/">
+            {% if post.featuredImage %}
+              <img class="card__img" src="{{ post.featuredImage }}" alt="" loading="lazy" />
+            {% endif %}
+            <p class="card__topic">
+              {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
+            </p>
+            <h3 class="card__title">{{ post.title }}</h3>
+            <time class="card__date" datetime="{{ post.publishedAt | isoDate }}">
+              {{ post.publishedAt | readableDate }}
+            </time>
+            <p class="card__excerpt">{{ post.excerpt | truncate(140) }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="section__more"><a href="/archive/">See all essays →</a></p>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title">Topics</h2>
+    <ul class="topic-grid">
+      {% for topic in topics %}
+        <li>
+          <a href="/topics/{{ topic.slug }}/" class="topic-card">
+            <h3>{{ topic.name }}</h3>
+            <p>{{ topic.intro | truncate(110) }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

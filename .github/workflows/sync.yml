@@ -1,0 +1,71 @@
+name: Sync and build
+
+# Runs every 6 hours plus manual trigger from the Actions tab.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install
+        run: npm ci
+
+      - name: Sync from Substack
+        run: npm run sync
+
+      - name: Build site
+        run: npm run build
+
+      - name: Build search index
+        run: npm run search-index
+
+      # Commit the updated data/posts.json so future builds are reproducible
+      # and you can see exactly what changed in each sync via git diff.
+      - name: Commit data changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/posts.json
+          git diff --staged --quiet || git commit -m "chore: sync Substack feed [skip ci]"
+          git push
+        continue-on-error: true
+
+      # Deploy step — uncomment ONE of these blocks based on your host.
+
+      # ---- Netlify ----
+      # - name: Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v3
+      #   with:
+      #     publish-dir: ./public
+      #     production-deploy: true
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      # ---- Vercel ----
+      # - name: Deploy to Vercel
+      #   run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+
+      # ---- GitHub Pages ----
+      # - name: Upload Pages artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: ./public
+      # - name: Deploy to GitHub Pages
+      #   uses: actions/deploy-pages@v4

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {# ---------- TITLE & DESCRIPTION ---------- #}
+  <title>{% if pageTitle %}{{ pageTitle }} — {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ pageDescription or site.description }}" />
+
+  {# ---------- CANONICAL ----------
+     If canonicalUrl is set (article pages compute this from canonicalMode),
+     use it. Otherwise, self-canonical to this URL on the mirror. #}
+  {% if canonicalUrl %}
+    <link rel="canonical" href="{{ canonicalUrl }}" />
+  {% else %}
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  {% endif %}
+
+  {% if noindex %}
+    <meta name="robots" content="noindex, nofollow" />
+  {% else %}
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+  {% endif %}
+
+  {# ---------- OPEN GRAPH ---------- #}
+  <meta property="og:site_name" content="{{ site.name }}" />
+  <meta property="og:locale" content="{{ site.locale }}" />
+  <meta property="og:type" content="{{ ogType or 'website' }}" />
+  <meta property="og:title" content="{{ pageTitle or site.name }}" />
+  <meta property="og:description" content="{{ pageDescription or site.description }}" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  {% if ogImage %}<meta property="og:image" content="{{ ogImage | absoluteUrl }}" />{% endif %}
+
+  {# ---------- TWITTER ---------- #}
+  <meta name="twitter:card" content="{% if ogImage %}summary_large_image{% else %}summary{% endif %}" />
+  <meta name="twitter:title" content="{{ pageTitle or site.name }}" />
+  <meta name="twitter:description" content="{{ pageDescription or site.description }}" />
+  {% if ogImage %}<meta name="twitter:image" content="{{ ogImage | absoluteUrl }}" />{% endif %}
+  {% if site.twitterHandle %}<meta name="twitter:site" content="{{ site.twitterHandle }}" />{% endif %}
+
+  {# ---------- RSS ---------- #}
+  <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="/rss.xml" />
+
+  {# ---------- FONTS / CSS ---------- #}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="/" class="site-header__brand" aria-label="{{ site.name }} home">
+        <span class="brand-mark">{{ site.name }}</span>
+      </a>
+      <nav class="site-header__nav" aria-label="Primary">
+        <a href="/archive/">Archive</a>
+        <a href="/topics/">Topics</a>
+        <a href="/start-here/">Start Here</a>
+        <a href="/search/">Search</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <p class="site-footer__brand">{{ site.name }}</p>
+        <p class="site-footer__tagline">{{ site.tagline }}</p>
+      </div>
+      <nav class="site-footer__nav" aria-label="Footer">
+        <a href="/archive/">Archive</a>
+        <a href="/topics/">Topics</a>
+        <a href="/about/">About</a>
+        <a href="/rss.xml">RSS</a>
+        <a href="{{ site.substackUrl }}" rel="external">Subscribe on Substack</a>
+      </nav>
+      <p class="site-footer__copy">© {{ site.author }}. All essays originally published on <a href="{{ site.substackUrl }}">{{ site.name }} on Substack</a>.</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

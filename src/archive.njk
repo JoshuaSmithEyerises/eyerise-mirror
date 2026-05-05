@@ -1,0 +1,61 @@
+---
+layout: base.njk
+permalink: /archive/
+pageTitle: Archive
+pageDescription: Every essay, organized by date.
+---
+
+<section class="section">
+  <div class="container container--narrow">
+    <header class="page-header">
+      <h1>Archive</h1>
+      <p>{{ collections.posts.length }} essays. Filter by year, topic, or keyword.</p>
+    </header>
+
+    <div class="archive-filters" role="group" aria-label="Filter essays">
+      <label>
+        <span>Topic</span>
+        <select id="filterTopic">
+          <option value="">All</option>
+          {% for topic in topics %}
+            <option value="{{ topic.slug }}">{{ topic.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <label>
+        <span>Year</span>
+        <select id="filterYear">
+          <option value="">All</option>
+          {# Build a unique list of years client-side instead — fewer template gymnastics #}
+        </select>
+      </label>
+
+      <label class="archive-filters__search">
+        <span class="visually-hidden">Search</span>
+        <input type="search" id="filterKeyword" placeholder="Search essays…" />
+      </label>
+    </div>
+
+    <ul class="archive-list" id="archiveList">
+      {% for post in collections.posts %}
+        <li class="archive-item"
+            data-topic="{{ post.topic }}"
+            data-year="{{ post.publishedAt | year }}"
+            data-title="{{ post.title | lower }}"
+            data-excerpt="{{ post.excerpt | lower | truncate(200) }}">
+          <a href="/articles/{{ post.slug }}/">
+            <time datetime="{{ post.publishedAt | isoDate }}">{{ post.publishedAt | readableDate }}</time>
+            <h2>{{ post.title }}</h2>
+            <p class="archive-item__topic">
+              {% for t in topics %}{% if t.slug == post.topic %}{{ t.name }}{% endif %}{% endfor %}
+            </p>
+            <p class="archive-item__excerpt">{{ post.excerpt | truncate(180) }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p class="archive-empty" id="archiveEmpty" hidden>No essays match these filters.</p>
+  </div>
+</section>
