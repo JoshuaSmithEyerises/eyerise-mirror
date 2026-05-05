@@ -22,7 +22,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -48,7 +48,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -100,7 +100,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -152,7 +152,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -178,7 +178,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -282,7 +282,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -412,7 +412,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {
@@ -958,7 +958,7 @@
     "noindex": false,
     "featured": false,
     "evergreen": false,
-    "popular": false,
+    "popular": true,
     "relatedSlugs": []
   },
   {

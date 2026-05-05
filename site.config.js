@@ -106,9 +106,14 @@ module.exports = {
   // Most Popular / Start Here — list of slugs for your most popular essays.
   // These show on the /start-here/ page.
   popularSlugs: [
-    // Add your most popular post slugs here, e.g.:
-    // "christianity-is-a-costume-in-america",
-    // "who-controls-what-you-know-trump",
+    "when-the-joke-writes-itself-firecracker-homelander-and-the-satire-that-got-lapped-by-the-news",
+    "red-or-blue-what-a-button-tells-you-about-your-politics",
+    "christianity-is-a-costume-in-america",
+    "clanker-was-always-the-plan-how-a-tiktok-slur-reveals-who-ai-was-built-to-replace",
+    "you-love-the-culture-you-just-dont-know-the-story",
+    "one-family-every-screen-how-the-ellisons-paramount-warner-takeover-finishes-what-trump-started",
+    "the-asterisk-people-how-variety-covered-sinners-vs-marty-supreme-and-what-that-tells-us-about-black-art-in-america",
+    "pray-for-me-not-with-me-knives-out-wake-up-dead-man-the-most-honest-film-about-american-christianity-in-years",
   ],
 
   // Evergreen / Start Here — list of slugs (deprecated, use popularSlugs instead).
