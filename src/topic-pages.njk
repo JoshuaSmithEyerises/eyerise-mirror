@@ -26,7 +26,12 @@ eleventyComputed:
       <p class="topic-header__intro">{{ topic.intro }}</p>
     </header>
 
-    {% set topicPosts = collections.posts | selectattr("topic", "equalto", topic.slug) %}
+    {% set topicPosts = [] %}
+    {% for post in collections.posts %}
+      {% if post.topic == topic.slug %}
+        {% set _ = topicPosts.push(post) %}
+      {% endif %}
+    {% endfor %}
 
     {% if topicPosts.length %}
       <ul class="card-grid">

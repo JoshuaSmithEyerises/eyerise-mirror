@@ -49,14 +49,17 @@ module.exports = {
       name: "Race and Culture",
       intro:
         "Essays on Blackness, identity, representation, and the cultural infrastructures that decide whose stories get told.",
-      match: ["race", "black", "blackness", "racism", "culture", "identity", "diaspora"],
+      match: ["race", "black", "blackness", "racism", "culture", "identity", "diaspora",
+              "african american", "representation", "diversity", "equity"],
     },
     {
       slug: "film-and-television",
       name: "Film and Television",
       intro:
         "Criticism of the moving image — what gets greenlit, what gets ignored, and what the industry's choices reveal about us.",
-      match: ["film", "movie", "cinema", "oscar", "director", "tv", "television", "sinners", "spike lee"],
+      match: ["film", "movie", "cinema", "oscar", "director", "tv", "television", "sinners", "spike lee",
+              "homelander", "firecracker", "boys", "adaptation", "hamlet", "romeo", "juliet", "pitt",
+              "academy", "bafta", "knives out", "viola davis", "streaming", "prime video", "amazon"],
     },
     {
       slug: "religion-and-public-life",
@@ -70,7 +73,8 @@ module.exports = {
       name: "Surveillance and Media Power",
       intro:
         "On the technologies of watching — and the institutions that decide which lives get scrutinized and which get protected.",
-      match: ["surveillance", "privacy", "facial recognition", "media", "platform", "censorship"],
+      match: ["surveillance", "privacy", "facial recognition", "media power", "platform", "censorship",
+              "bezos", "ellison", "paramount", "warner", "takeover", "consolidation"],
     },
     {
       slug: "sports-and-politics",

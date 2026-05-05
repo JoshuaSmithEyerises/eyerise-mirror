@@ -14,7 +14,12 @@ pageDescription: Browse essays by topic — AI, race, film, religion, surveillan
 
     <ul class="topic-grid">
       {% for topic in topics %}
-        {% set count = (collections.posts | selectattr("topic", "equalto", topic.slug)).length %}
+        {% set count = 0 %}
+        {% for post in collections.posts %}
+          {% if post.topic == topic.slug %}
+            {% set count = count + 1 %}
+          {% endif %}
+        {% endfor %}
         <li>
           <a href="/topics/{{ topic.slug }}/" class="topic-card">
             <h2>{{ topic.name }}</h2>

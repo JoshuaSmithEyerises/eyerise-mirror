@@ -17,7 +17,12 @@ pageDescription: Essays on race, culture, film, AI, and the systems shaping publ
 </section>
 
 {# Featured essays — pulled from posts flagged featured=true #}
-{% set featured = collections.posts | selectattr("featured", "equalto", true) %}
+{% set featured = [] %}
+{% for post in collections.posts %}
+  {% if post.featured %}
+    {% set _ = featured.push(post) %}
+  {% endif %}
+{% endfor %}
 {% if featured.length %}
 <section class="section">
   <div class="container">

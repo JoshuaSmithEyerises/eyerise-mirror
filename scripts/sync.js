@@ -56,7 +56,9 @@ function classifyTopic(post) {
     for (const keyword of topic.match) {
       // Use word boundary matching to avoid partial matches
       // e.g., "sport" won't match "transport" or "report"
-      const wordBoundaryRegex = new RegExp(`\\b${keyword.toLowerCase()}\\b`);
+      // Also handle plurals with optional 's'
+      const escapedKeyword = keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const wordBoundaryRegex = new RegExp(`\\b${escapedKeyword}s?\\b`);
       if (wordBoundaryRegex.test(haystack)) return topic.slug;
     }
   }
